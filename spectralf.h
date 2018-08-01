@@ -32,10 +32,13 @@ template<typename M> M spectralf(const M& matrix, int rank){
 	Matrix<double,Dynamic,1> vals = svd.singularValues();
     
     int svdrank = vals.size();
+    if(rank >= svdrank){
+        std::cout << "reverted to original rank" << std::endl;
+        return matrix;
+    }
 
-    //TODO: rank truncation
-
-    return matrix;
+    return svd.matrixU().leftCols(rank) * vals.head(rank).asDiagonal() *
+    svd.matrixV().leftCols(rank).transpose();
 }
 
 #endif //SPECTRALF_H
