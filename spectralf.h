@@ -18,7 +18,7 @@ template<typename M> M spectralf(const M& matrix, double tol){
         if(vals(i) >= tol) cut_idx = i; 
     }
 	if(cut_idx == vals.size()-1){
-    std::cout << "reverted back to original rank" << std::endl;
+    std::cout << "reverted to original rank" << std::endl;
     return matrix;
     }
 
