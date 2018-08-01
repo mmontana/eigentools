@@ -15,15 +15,15 @@ template<typename M> M spectralf(const M& matrix, double tol){
 
     int cut_idx;
     for(int i = 0; i < vals.size(); i++){
-        if(vals(i) > tol) cut_idx = i; 
+        if(vals(i) >= tol) cut_idx = i; 
     }
 	if(cut_idx == vals.size()-1){
     std::cout << "reverted back to original rank" << std::endl;
     return matrix;
     }
 
-    return svd.matrixU().leftCols(cut_idx) * vals.head(cut_idx).asDiagonal() *
-    svd.matrixV().leftCols(cut_idx).transpose();
+    return svd.matrixU().leftCols(cut_idx+1) * vals.head(cut_idx+1).asDiagonal() *
+    svd.matrixV().leftCols(cut_idx+1).transpose();
 }
 
 template<typename M> M spectralf(const M& matrix, int rank){
